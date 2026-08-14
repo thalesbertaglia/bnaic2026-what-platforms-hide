@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Platforms Hide - BNAIC/BeNeLearn 2026 Session</title>
+  <meta name="description"
+    content="A participatory BNAIC/BeNeLearn 2026 session on computational methods for public-interest platform research.">
+  <style>
+    :root {
+      --paper: #fbf8f1;
+      --ink: #151412;
+      --muted: #69635a;
+      --line: #ded6c8;
+      --line-strong: #151412;
+      --pink: #ff4fa3;
+      --pink-soft: #ffd8ec;
+      --pink-wash: #fff0f8;
+      --blue-soft: #dfecef;
+      --white: #fffdfa;
+      --mono: "SFMono-Regular", "Roboto Mono", Consolas, monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.2em;
+    }
+
+    .page {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 clamp(1.1rem, 4vw, 2rem);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line-strong);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .topbar div:first-child::after {
+      content: "";
+      display: inline-block;
+      width: 0.55rem;
+      height: 0.55rem;
+      margin-left: 0.55rem;
+      background: var(--pink);
+      transform: rotate(-8deg);
+      vertical-align: 0.02rem;
+    }
+
+    .topbar nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.8rem;
+    }
+
+    .hero {
+      padding: clamp(2.8rem, 7vw, 5.2rem) 0 clamp(2rem, 4.8vw, 3.5rem);
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .eyebrow,
+    .label,
+    .tag {
+      margin: 0;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow,
+    .label {
+      color: var(--pink);
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 1rem 0 0;
+      font-size: clamp(3rem, 7.4vw, 6.5rem);
+      line-height: 0.88;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      max-width: 820px;
+      margin: clamp(1.25rem, 3vw, 2.1rem) 0 0;
+      font-size: clamp(1.3rem, 2.65vw, 2.35rem);
+      line-height: 1.08;
+      font-weight: 760;
+    }
+
+    .highlight {
+      background: var(--pink-soft);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      padding: 0 0.12em;
+    }
+
+    .scribble {
+      display: inline-block;
+      position: relative;
+    }
+
+    .scribble::after {
+      content: "";
+      position: absolute;
+      left: -0.05em;
+      right: -0.05em;
+      bottom: 0.05em;
+      height: 0.23em;
+      background: var(--pink-soft);
+      z-index: -1;
+      transform: rotate(-1deg);
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: clamp(1.5rem, 4vw, 2.5rem);
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .meta div {
+      background: var(--white);
+      padding: 0.75rem 0.85rem;
+    }
+
+    .meta dt {
+      margin: 0 0 0.25rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .meta dd {
+      margin: 0;
+      font-weight: 760;
+      line-height: 1.25;
+    }
+
+    .reasons {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-top: 1.1rem;
+    }
+
+    .reason {
+      padding-top: 0.65rem;
+      border-top: 3px solid var(--pink);
+    }
+
+    .reason strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+
+    .reason span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.6rem;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--line-strong);
+      background: var(--ink);
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 760;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background: var(--pink-soft);
+      color: var(--ink);
+    }
+
+    .inline-link {
+      color: var(--ink);
+      text-decoration-color: var(--pink);
+    }
+
+    section {
+      padding: clamp(2.15rem, 5.2vw, 3.8rem) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+      gap: clamp(1.25rem, 4vw, 3.5rem);
+    }
+
+    h2 {
+      max-width: 640px;
+      margin: 0;
+      font-size: clamp(1.65rem, 3.8vw, 3.35rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.25rem;
+      line-height: 1.12;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .copy {
+      max-width: 760px;
+      font-size: 1.06rem;
+    }
+
+    .copy p+p {
+      margin-top: 0.95rem;
+    }
+
+    .bam {
+      max-width: 780px;
+      font-size: clamp(1.18rem, 2.2vw, 1.85rem);
+      line-height: 1.15;
+      font-weight: 740;
+    }
+
+    .signal-strip {
+      display: grid;
+      grid-template-columns: 0.65fr 1fr;
+      gap: 1px;
+      margin-top: 1.15rem;
+      background: var(--line);
+      border: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 0.84rem;
+    }
+
+    .signal-strip div {
+      padding: 0.6rem 0.75rem;
+      background: var(--white);
+    }
+
+    .signal-strip div:nth-child(odd) {
+      color: var(--muted);
+    }
+
+    .signal-strip div:nth-child(4) {
+      background: var(--pink-wash);
+    }
+
+    .signal-strip strong {
+      color: var(--pink);
+    }
+
+    .talks,
+    .agenda,
+    .people {
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .talk,
+    .agenda-row {
+      display: grid;
+      grid-template-columns: minmax(130px, 0.28fr) minmax(0, 1fr);
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .talk-id,
+    .time {
+      font-family: var(--mono);
+      color: var(--pink);
+      font-size: 0.82rem;
+      font-weight: 780;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .talk p {
+      max-width: 760px;
+      color: var(--muted);
+    }
+
+    .speaker {
+      margin-top: 0.45rem;
+      color: var(--ink);
+      font-weight: 760;
+    }
+
+    .lab {
+      background: var(--white);
+      margin-left: calc(clamp(1.1rem, 4vw, 2rem) * -1);
+      margin-right: calc(clamp(1.1rem, 4vw, 2rem) * -1);
+      padding-left: clamp(1.1rem, 4vw, 2rem);
+      padding-right: clamp(1.1rem, 4vw, 2rem);
+    }
+
+    .prompts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 1.15rem;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .prompt {
+      min-height: 7.9rem;
+      padding: 0.85rem;
+      background: var(--paper);
+    }
+
+    .prompt:nth-child(4) {
+      background: var(--pink-wash);
+    }
+
+    .prompt .tag {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--pink);
+    }
+
+    .prompt strong {
+      display: block;
+      margin-bottom: 0.45rem;
+      line-height: 1.15;
+    }
+
+    .outcome {
+      background: var(--blue-soft);
+      margin-left: calc(clamp(1.1rem, 4vw, 2rem) * -1);
+      margin-right: calc(clamp(1.1rem, 4vw, 2rem) * -1);
+      padding-left: clamp(1.1rem, 4vw, 2rem);
+      padding-right: clamp(1.1rem, 4vw, 2rem);
+    }
+
+    .people {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 1.5rem;
+      padding-top: 0.5rem;
+    }
+
+    .person {
+      padding: 0.42rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.98rem;
+    }
+
+    .person a {
+      font-weight: 760;
+      text-decoration-color: var(--pink);
+    }
+
+    .person span {
+      color: var(--muted);
+    }
+
+    .interest {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, auto);
+      gap: 1.75rem;
+      align-items: center;
+      background: var(--pink-soft);
+      margin-left: calc(clamp(1.1rem, 4vw, 2rem) * -1);
+      margin-right: calc(clamp(1.1rem, 4vw, 2rem) * -1);
+      padding-left: clamp(1.1rem, 4vw, 2rem);
+      padding-right: clamp(1.1rem, 4vw, 2rem);
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .interest p:not(.label) {
+      max-width: 720px;
+      margin-top: 0.7rem;
+      color: var(--muted);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 760px) {
+
+      .topbar,
+      .split,
+      .interest {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+      }
+
+      .topbar nav {
+        justify-content: flex-start;
+      }
+
+      .meta,
+      .reasons,
+      .prompts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      h1 {
+        font-size: clamp(3rem, 17vw, 4.7rem);
+      }
+
+      .meta,
+      .reasons,
+      .signal-strip,
+      .talk,
+      .agenda-row,
+      .prompts {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div>BNAIC / BeNeLearn 2026</div>
+      <nav aria-label="Page sections">
+        <a href="#session">Session</a>
+        <a href="#programme">Programme</a>
+        <a href="#lab">Lab</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#organisers">Organisers</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">3-hour participatory session</p>
+        <h1 id="page-title">What Platforms Hide</h1>
+        <p class="subtitle">
+          How can AI researchers study recommendation, ads, tracking, and monetisation when platforms only show part of
+          the picture?
+        </p>
+        <dl class="meta">
+          <div>
+            <dt>Date</dt>
+            <dd>21 October 2026</dd>
+          </div>
+          <div>
+            <dt>Place</dt>
+            <dd>Maastricht University</dd>
+          </div>
+          <div>
+            <dt>Duration</dt>
+            <dd>3 hours</dd>
+          </div>
+          <div>
+            <dt>Format</dt>
+            <dd>Talks, demo, group exercise</dd>
+          </div>
+        </dl>
+        <div class="reasons" aria-label="Reasons to attend">
+          <div class="reason">
+            <strong>Concrete cases</strong>
+            <span>App tracking, platform data access, political content monetisation.</span>
+          </div>
+          <div class="reason">
+            <strong>Technical problems</strong>
+            <span>Auditing, weak labels, multimodal signals, synthetic data, measurement.</span>
+          </div>
+          <div class="reason">
+            <strong>Active room</strong>
+            <span>Bring a method, example, or question.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="session">
+        <div class="split">
+          <p class="label">Session idea</p>
+          <div>
+            <p class="bam">
+              Platforms influence what people encounter every day: which videos are recommended, which products appear
+              first, which ads are delivered, which posts disappear, and which creators get paid.
+            </p>
+            <div class="copy" style="margin-top: 1rem;">
+              <p>
+                These are technical systems with public consequences. They shape visibility, money, moderation, and
+                attention, but researchers usually see them from the outside: public posts, links, app traffic,
+                metadata, and limited APIs.
+              </p>
+              <p>
+                This session is about what computational researchers can do in that situation. We focus on practical
+                methods for studying platforms: auditing, measurement, NLP, multimodal analysis, network analysis,
+                synthetic data, and research designs that work with partial access.
+              </p>
+            </div>
+            <div class="signal-strip" aria-label="Example platform questions and methods">
+              <div>questions</div>
+              <div>ranking, tracking, ads, monetisation, moderation</div>
+              <div>methods</div>
+              <div><strong>audits</strong>, measurement, NLP, multimodal ML, networks, synthetic data</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="programme">
+        <div class="split">
+          <div>
+            <p class="label">Programme</p>
+            <h2>Details to be confirmed</h2>
+          </div>
+          <div class="talks">
+            <article class="talk">
+              <div class="talk-id">01</div>
+              <div>
+                <h3>Short invited talks</h3>
+                <p>Concrete cases from app tracking, platform data access, and monetised political content.</p>
+              </div>
+            </article>
+            <article class="talk">
+              <div class="talk-id">02</div>
+              <div>
+                <h3>Open discussion</h3>
+                <p>Each talk will leave time for questions, examples from the audience, and methodological debate.</p>
+              </div>
+            </article>
+            <article class="talk">
+              <div class="talk-id">03</div>
+              <div>
+                <h3>Small-group frontier exercise</h3>
+                <p>Participants will connect platform problems to methods, disciplines, and possible collaborations.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="lab" id="lab">
+        <div class="split">
+          <div>
+            <p class="label">Participatory core</p>
+            <h2>Platform Research Frontiers</h2>
+          </div>
+          <div>
+            <p class="bam">
+              Bring a method. Bring a platform problem. Leave with a sharper question than the one you walked in with.
+            </p>
+            <div class="copy" style="margin-top: 0.8rem;">
+              <p>
+                We will use small groups to turn broad platform concerns into researchable problems: what is worth
+                studying, which methods could help, what breaks in practice, and what could be built next.
+              </p>
+            </div>
+            <div class="prompts">
+              <div class="prompt">
+                <span class="tag">01</span>
+                <strong>What should we study?</strong>
+                <p>A viral video, a buried product, a strange ad, a vanished post, a political creator making money.</p>
+              </div>
+              <div class="prompt">
+                <span class="tag">02</span>
+                <strong>What can each field bring?</strong>
+                <p>Measurement, NLP, multimodal ML, networks, law, social theory, synthetic data, interface design.</p>
+              </div>
+              <div class="prompt">
+                <span class="tag">03</span>
+                <strong>Where is the frontier?</strong>
+                <p>Labels, ethics, law, incentives, distribution shift, multimodal evidence.</p>
+              </div>
+              <div class="prompt">
+                <span class="tag">04</span>
+                <strong>What can we do next?</strong>
+                <p>Audits, proxies, simulations, datasets, tools, observatories.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="outcome">
+        <div class="split">
+          <p class="label">Expected outcome</p>
+          <p class="bam">
+            A short, shared map of platform problems worth studying: what is technically interesting, what society needs
+            to know, and where different fields can push the frontier.
+          </p>
+        </div>
+      </section>
+
+      <section id="agenda">
+        <div class="split">
+          <div>
+            <p class="label">Agenda</p>
+            <h2>Talks first. Then the room works.</h2>
+          </div>
+          <div class="agenda">
+            <div class="agenda-row">
+              <div class="time">10 min</div>
+              <div>Opening and framing</div>
+            </div>
+            <div class="agenda-row">
+              <div class="time">3 x 30 min</div>
+              <div>Three invited talks, each followed by open discussion</div>
+            </div>
+            <div class="agenda-row">
+              <div class="time">30 min</div>
+              <div>Small-group frontier exercise</div>
+            </div>
+            <div class="agenda-row">
+              <div class="time">30 min</div>
+              <div>Group reporting and open discussion</div>
+            </div>
+            <div class="agenda-row">
+              <div class="time">20 min</div>
+              <div>Networking and potential collaborations</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="split">
+          <p class="label">Audience</p>
+          <p class="bam">
+            For AI, ML, NLP, multimodal, network, synthetic data, and computational social science researchers who want
+            their methods near messy public problems. No legal background required.
+          </p>
+        </div>
+      </section>
+
+      <section id="organisers">
+        <div class="split">
+          <div>
+            <p class="label">Confirmed organisers and speakers</p>
+            <h2>Organisers</h2>
+          </div>
+          <div class="people">
+            <div class="person">
+              <a href="https://thalesbertaglia.com/" target="_blank" rel="noopener">Thales Bertaglia</a>
+              <span>Utrecht University</span>
+            </div>
+            <div class="person">
+              <a href="https://www.uu.nl/staff/ECGoanta" target="_blank" rel="noopener">Catalina Goanta</a>
+              <span>Utrecht University</span>
+            </div>
+            <div class="person">
+              <a href="https://kollnig.net/" target="_blank" rel="noopener">Konrad Kollnig</a>
+              <span>Maastricht University &amp; Tech Lab</span>
+            </div>
+            <div class="person">
+              <a href="https://www.maastrichtuniversity.nl/ai-iamnitchi" target="_blank" rel="noopener">Adriana
+                Iamnitchi</a>
+              <span>Maastricht University</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interest">
+        <div>
+          <p class="label">Interested in participating?</p>
+          <h2>Let us know.</h2>
+          <p>If you plan to attend BNAIC and this session sounds relevant, send a quick note. We will use the responses
+            to tune the discussion and group exercise to the people in the room.</p>
+        </div>
+        <a class="button" href="https://forms.cloud.microsoft/e/3yy81x7VaT">Register
+          interest</a>
+      </section>
+    </main>
+
+    <footer>
+      <div>What Platforms Hide - BNAIC / BeNeLearn 2026</div>
+      <div>Attendance via BNAIC registration</div>
+    </footer>
+  </div>
+</body>
+
+</html>
