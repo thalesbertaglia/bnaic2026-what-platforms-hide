@@ -228,17 +228,22 @@
 
     .split {
       display: grid;
-      grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
-      gap: clamp(1.25rem, 4vw, 3.5rem);
+      grid-template-columns: minmax(220px, 0.42fr) minmax(0, 1fr);
+      gap: clamp(1.25rem, 3.5vw, 3rem);
+    }
+
+    .split > * {
+      min-width: 0;
     }
 
     h2 {
       max-width: 640px;
       margin: 0;
-      font-size: clamp(1.65rem, 3.8vw, 3.35rem);
-      line-height: 0.98;
+      font-size: clamp(1.55rem, 3.1vw, 2.75rem);
+      line-height: 1;
       letter-spacing: 0;
       text-transform: uppercase;
+      overflow-wrap: break-word;
     }
 
     h3 {
